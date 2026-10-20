@@ -1,0 +1,16 @@
+{
+  "name": "route-lab",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "WireGuard game route manager and independent UDP routing laboratory",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node cli.mjs demo",
+    "games": "node cli.mjs games",
+    "test": "node --test --test-concurrency=1 test/*.test.mjs relay-server/*.test.mjs"
+  },
+  "license": "UNLICENSED"
+}
