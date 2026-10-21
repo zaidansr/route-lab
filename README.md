@@ -22,7 +22,7 @@ Install [Node.js](https://nodejs.org/) 24 or newer. The project uses Node's stan
 From this repository's root, start the local lab:
 
 ```sh
-node cli.mjs demo
+node route-lab/cli.mjs demo
 ```
 
 Open **http://127.0.0.1:8765**. The demo generates four small echo requests per second. Try **Baseline**, **Degrade A**, **Drop A** and **Duplicate paths**. Use **Ctrl+C** in the console to stop it.
@@ -30,10 +30,10 @@ Open **http://127.0.0.1:8765**. The demo generates four small echo requests per 
 On Windows, start the separate game connection manager:
 
 ```powershell
-node .\cli.mjs games
+node .\route-lab\cli.mjs games
 ```
 
-Open **http://127.0.0.1:8766**. Read [GAME-MODE.md](GAME-MODE.md) before installing or activating a tunnel. The Windows `.cmd` launchers provide the same entry points when Node is on PATH.
+Open **http://127.0.0.1:8766**. Read [GAME-MODE.md](route-lab/GAME-MODE.md) before installing or activating a tunnel. The Windows `.cmd` launchers provide the same entry points when Node is on PATH.
 
 ## UDP laboratory architecture
 
@@ -51,7 +51,7 @@ Fixed owned UDP target
 
 The gateway probes each path and scores measured RTT, jitter and recent probe loss. Hysteresis limits healthy-path switching; a failed path allows failover. Duplicate mode sends the same flow/sequence over up to two healthy paths. The common exit deduplicates before target delivery, and the gateway deduplicates replies.
 
-RLP2 uses AES-256-GCM with authenticated metadata, random nonces, freshness limits and bounded replay windows. It is a research protocol, not an audited VPN protocol. The lab accepts opt-in IPv4 UDP payloads up to 1200 bytes and does not capture installed games. See [DESIGN.md](DESIGN.md) and [CODE-PATH.md](CODE-PATH.md).
+RLP2 uses AES-256-GCM with authenticated metadata, random nonces, freshness limits and bounded replay windows. It is a research protocol, not an audited VPN protocol. The lab accepts opt-in IPv4 UDP payloads up to 1200 bytes and does not capture installed games. See [DESIGN.md](route-lab/DESIGN.md) and [CODE-PATH.md](route-lab/CODE-PATH.md).
 
 ## WireGuard connection architecture
 
@@ -69,7 +69,7 @@ The manager generates matching client/server keys and private configuration file
 
 Routing is by destination IP, not executable identity. All applications sending to an allowlisted IP use that route. Traffic can include IPv4 TCP and UDP; IPv6 continues to use existing routing. Match-server addresses may change and are not discovered automatically.
 
-The [Linux relay package](relay-server/README.md) defaults to a read-only plan and requires an explicit root apply. It scopes forwarding to the configured client and destination list. It is runtime-only; reboot requires explicit removal/reapplication.
+The [Linux relay package](route-lab/relay-server/README.md) defaults to a read-only plan and requires an explicit root apply. It scopes forwarding to the configured client and destination list. It is runtime-only; reboot requires explicit removal/reapplication.
 
 ## What this project does not establish
 
@@ -86,21 +86,21 @@ A relay can improve or worsen a route. Two remote paths can still share a failin
 
 Generated game profiles and keys are stored in `.private/`; lab role configs are generated in `config/`. Both are ignored by Git. The Windows manager restricts private storage access to the current user, SYSTEM and Administrators and rejects managed links/junctions.
 
-Do not publish generated tunnel configs, private/preshared keys, `.env` files, captures or local logs. The repository includes source and tests, not live credentials, vendor application binaries or WireGuard installers. See [tools/README.md](tools/README.md) for the optional pinned MSI staging procedure.
+Do not publish generated tunnel configs, private/preshared keys, `.env` files, captures or local logs. The repository includes source and tests, not live credentials, vendor application binaries or WireGuard installers. See [tools/README.md](route-lab/tools/README.md) for the optional pinned MSI staging procedure.
 
 ## Tests and validation
 
 ```sh
-npm test
+npm --prefix route-lab test
 ```
 
 On Windows, also run:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\windows\Test-TunnelValidation.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\route-lab\windows\Test-TunnelValidation.ps1
 ```
 
-The development baseline on 20 October 2026 passed **44 Node tests and 21 Windows policy checks** using Node.js 24 on Windows. These cover loopback forwarding, replay handling, route selection, private profile generation, configuration rejection, HTTP boundaries, mocked Windows management and Linux relay plan parsing. They do not substitute for live tunnel or gameplay tests. See [TESTING.md](TESTING.md).
+The development baseline on 20 October 2026 passed **44 Node tests and 21 Windows policy checks** using Node.js 24 on Windows. These cover loopback forwarding, replay handling, route selection, private profile generation, configuration rejection, HTTP boundaries, mocked Windows management and Linux relay plan parsing. They do not substitute for live tunnel or gameplay tests. See [TESTING.md](route-lab/TESTING.md).
 
 ## Source map
 
@@ -116,4 +116,4 @@ The development baseline on 20 October 2026 passed **44 Node tests and 21 Window
 
 ## License and dependencies
 
-Licensed under the MIT License. See LICENSE for details. External projects retain their own licenses; see [THIRD-PARTY.md](THIRD-PARTY.md).
+Licensed under the MIT License. See LICENSE for details. External projects retain their own licenses; see [THIRD-PARTY.md](route-lab/THIRD-PARTY.md).

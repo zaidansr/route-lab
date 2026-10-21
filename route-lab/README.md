@@ -116,4 +116,4 @@ The development baseline on 20 October 2026 passed **44 Node tests and 21 Window
 
 ## License and dependencies
 
-No project license has been selected yet. Choose and add an appropriate license before describing this as an open-source release. The package's `UNLICENSED` marker does not select a license for redistribution. External projects retain their own licenses; see [THIRD-PARTY.md](THIRD-PARTY.md).
+Licensed under the MIT License. See [LICENSE](../LICENSE) for details. External projects retain their own licenses; see [THIRD-PARTY.md](THIRD-PARTY.md).

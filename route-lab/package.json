@@ -12,5 +12,5 @@
     "games": "node cli.mjs games",
     "test": "node --test --test-concurrency=1 test/*.test.mjs relay-server/*.test.mjs"
   },
-  "license": "UNLICENSED"
+  "license": "MIT"
 }

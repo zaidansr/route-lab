@@ -1,0 +1,38 @@
+# Private credentials and generated configurations
+.private/
+config/
+.env
+.env.*
+!.env.example
+*.conf
+*.conf.dpapi
+*.key
+*.pem
+*.p12
+*.pfx
+
+# External binaries and build/dependency output
+tools/*.msi
+tools/*.exe
+tools/*.dll
+node_modules/
+coverage/
+dist/
+
+# Runtime data and machine-specific reports
+*.log
+*.tap
+*.pcap
+*.pcapng
+*.etl
+*.dmp
+*.zip
+*-validation.json
+validation.json
+game-live-status.json
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
